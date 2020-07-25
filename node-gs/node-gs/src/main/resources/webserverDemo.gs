@@ -1,6 +1,4 @@
 module WebserverDemo;
-import http;
-import json;
 import webframework;
 
 /*
@@ -8,13 +6,13 @@ import webframework;
 */
 names = new [];
 
-renderNames = (req, res) -> {
+getNamesHandler = (req, res) -> {
     for(i=0 ; i < names.length ; i++) {
     	res.write("<center><b>Hello: " + names[i] + "</b></center>");
     };
 };
 
-storeName = (req, res) -> {
+storeNameHandler = (req, res) -> {
 	/**
 	* Demonstrate how to parse the request body from Json into a gscript object structure.
 	*/
@@ -33,8 +31,9 @@ storeName = (req, res) -> {
     return;
 }
 
-webframework.registerHandler( http.METHOD_GET, "/names", renderNames );
-webframework.registerHandler( http.METHOD_PUT, "/", storeName );
-webframework.registerHandler( http.METHOD_GET, "/hello", (req,res) -> { res.write("Hello world"); } );
-webframework.registerHandler( http.METHOD_GET, "/version", (req,res) -> { res.write("1.0"); } );
-webframework.server.start();
+framework = webframework.create(8080);
+framework.registerHandler( http.METHOD_GET, "/names", getNamesHandler );
+framework.registerHandler( http.METHOD_PUT, "/", storeNameHandler );
+framework.registerHandler( http.METHOD_GET, "/hello", (req,res) -> { res.write("Hello world"); } );
+framework.registerHandler( http.METHOD_GET, "/version", (req,res) -> { res.write("1.0"); } );
+framework.start();
