@@ -38,7 +38,6 @@ public class JsonBridge implements RequiresGVMContext {
 		if(value.getType().isInstance(new ObjectType())) {
 			Object o = context.getHeap().getObject(value.getValue());
 			if(o instanceof GVMPlainObject) {
-				
 				Map<String,Object> objectMap = new HashMap<String,Object>();
 				for(String key : ((GVMPlainObject)o).getKeys()) {
 					Value fieldValue = ((GVMPlainObject)o).getValue(key);

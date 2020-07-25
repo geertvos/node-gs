@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class WrappedResponse implements NodeGSResponse {
 
-	private HttpServletResponse response;
+	private final HttpServletResponse response;
 	
 	public WrappedResponse(HttpServletResponse response) {
 		this.response = response;

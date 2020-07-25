@@ -1,8 +1,10 @@
 package net.geertvos.nodegs.http;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+/**
+ * Interface for the HTTP hander. This enabled the GVM to generate a proxy for Gscript callbacks.
+ * @author geert
+ *
+ */
 public interface NodeGSHttpHandler {
 
 	void handle(NodeGSRequest request, NodeGSResponse response);
