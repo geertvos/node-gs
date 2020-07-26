@@ -15,8 +15,7 @@ create = (port) ->
 	mainhandler = (req, res) -> {
 		try {
 		    res.setHeader(http.HEADER_CONTENT_TYPE, http.MIME_TEXT_HTML);
-			handlers = webframework.methodHandlers[req.getMethod()];
-			handler = handlers[req.url];
+			handler = methodHandlers[req.getMethod()][req.url];
 			if( handler != null ) {
 			    res.setStatusCode(http.STATUS_OK);
 				handler(req, res);
@@ -37,8 +36,7 @@ create = (port) ->
 	server = http.createServer(mainhandler, port);
 	
 	registerHandler = (method, path, callback) -> {
-		this.handlers = methodHandlers[method];
-		this.handlers[path] = callback;
+		methodHandlers[method][path] = callback;
 		return;
 	};
 	
